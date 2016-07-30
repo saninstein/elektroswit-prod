@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div id="body">
+        <div id="login">
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                {% if login_error %}
+                    <label class="error">{{ login_error }}</label>
+                {% endif %}
+                <input placeholder="Логин" class="new-cont-textinput" type="text" name="username" id="username">
+                <br>
+                <br>
+                <input placeholder="Пароль" class="new-cont-textinput" type="password" name="password" id="password">
+
+                <input class="button" type="submit" value="Войти">
+            </form>
+        </div>
+    </div>
+{% endblock %}

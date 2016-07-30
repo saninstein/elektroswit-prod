@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+    <div id="body">
+        <div class="a-cont">
+            <div id="a-cont-first" class="a-cont-tittle">Товары</div>
+            <ul>
+                <li><a href="{% url 'add_item' 'phone' %}"><i class="fa fa-plus-square" aria-hidden="true"></i></a><a class="a-cont-link" href="{% url 'show' 'phone' %}">Смартфоны</a></li>
+                <li><a href="{% url 'add_item' 'tablet' %}"><i class="fa fa-plus-square" aria-hidden="true"></i></a><a class="a-cont-link" href="{% url 'show' 'tablet' %}">Планшеты</a></li>
+                <li><a href="{% url 'add_item' 'notebook' %}"><i class="fa fa-plus-square" aria-hidden="true"></i></a><a class="a-cont-link" href="{% url 'show' 'notebook' %}">Ноутбуки</a></li>
+                <li><a href="{% url 'add_item' 'accessories' %}"><i class="fa fa-plus-square" aria-hidden="true"></i></a><a class="a-cont-link" href="{% url 'show' 'accessories' %}">Аксессуары и комплектующие</a></li>
+                <li><a href="{% url 'add_item' 'appliances' %}"><i class="fa fa-plus-square" aria-hidden="true"></i></a><a class="a-cont-link" href="{% url 'show' 'appliances' %}">Бытовая Техника</a></li>
+                <li><a href="{% url 'add_item' 'master-tools' %}"><i class="fa fa-plus-square" aria-hidden="true"></i></a><a class="a-cont-link" href="{% url 'show' 'master-tools' %}">Всё для мастера</a></li>
+                <li><a href="{% url 'add_share' %}"><i class="fa fa-plus-square" aria-hidden="true"></i></a><a class="a-cont-link" href="{% url 'show' 'share' %}">Акции</a></li>
+            </ul>
+            <div id="a-cont-first" class="a-cont-tittle">Заказы и клиенты</div>
+            <ul>
+                <li><a class="a-cont-link" href="{% url 'show' 'order' %}">Заказы</a></li>
+                <li><a class="a-cont-link" href="{% url 'show' 'clients' %}">Клиенты</a></li>
+            </ul>
+            <div id="a-cont-first" class="a-cont-tittle">Информация</div>
+            <ul>
+                <li><a href="{% url 'info_edit' 'payment' %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a class="a-cont-link" href="{% url 'info_edit' 'payment' %}">Оплата</a></li>
+                <li><a href="{% url 'info_edit' 'delivery' %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a class="a-cont-link" href="{% url 'info_edit' 'delivery' %}">Доставка</a></li>
+                <li><a href="{% url 'info_edit' 'about' %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a class="a-cont-link" href="{% url 'info_edit' 'about' %}">О магазине</a></li>
+                <li><a href="{% url 'info_edit' 'rmail' %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a class="a-cont-link" href="{% url 'info_edit' 'rmail' %}">Реквизиты(для сообщеий)</a></li>
+            </ul>
+            <div id="a-cont-first" class="a-cont-tittle">Слайды</div>
+            <ul>
+                <li><a href="{% url 'slide_edit' '1' %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a class="a-cont-link" href="">Слайд 1</a></li>
+                <li><a href="{% url 'slide_edit' '2' %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a class="a-cont-link" href="">Слайд 2</a></li>
+                <li><a href="{% url 'slide_edit' '3' %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a class="a-cont-link" href="">Слайд 3</a></li>
+                <li><a href="{% url 'slide_edit' '4' %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a class="a-cont-link" href="">Слайд 4</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

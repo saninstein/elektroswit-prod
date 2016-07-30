@@ -1,0 +1,94 @@
+/* For tablets & smart phones */
+    @media (max-width: 767px) {
+    
+      .carousel {
+        width: 670px;
+      }
+    }
+
+    /* For smartphones */
+   /* @media (max-width: 480px) {
+      .carousel {
+        width: 283px;
+      }
+    }*/
+
+    /* For smaller displays like laptops */
+    @media (min-width: 768px) and (max-width: 979px) {
+      .carousel{
+        width: 670px;
+      }
+    }
+
+    /* For larger displays */
+    @media (min-width: 1200px) {
+      .carousel {
+        width: 1230px;
+      }
+    }
+
+.carousel  {
+    /* ������ ����� ����� */
+
+   margin: 0 auto;
+   position: relative;
+   z-index: 2;
+   
+}
+.carousel-wrapper {
+   margin: 10px 30px; /* ������� ��� ������� */
+   overflow: hidden; /* �������� ����������, ��������� �� ����� �������� ������� */
+   position:relative;
+   z-index: 2;
+}
+.carousel-items {
+   width: 10000px; /* ������������� ������� ������ ��� ������ ��������� */
+   position: relative;
+   z-index: 2;
+    /* ������������� ���� ������������ �������� ������� �������� */
+}
+.carousel-block {
+  position: relative;
+  
+   background-color: white;
+   float: left; /* ����������� ��� �������� �������� � ��� */
+   width: 250px; /* ����� ������ ������� �������� */
+   padding: 10px 15px;
+   border-left: 3px solid #EDEDED;
+}
+
+
+.carousel-block img{
+    margin: 0 auto;
+	display:block;
+    overflow:hidden;
+
+}
+
+/*********** BUTTONS ***********/
+.carousel-button-left a, .carousel-button-right a{
+   height: 50px;
+   width: 50px;
+   position: relative;
+   top: 125px; 
+   cursor: pointer; 
+   text-decoration:none;
+   z-index: 3;
+   
+}
+.carousel-button-left a{
+   float: left; 
+   background: url(../img/carousel-left.png); 
+   background-size: 50px;
+  
+
+}
+.carousel-button-right a{
+   float: right;
+   background: url(../img/carousel-right.png); 
+   background-size: 50px;
+   
+   
+}
+
+/*********** SHADOW ***********/

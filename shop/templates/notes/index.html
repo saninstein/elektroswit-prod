@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static "res/css/blocks.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "res/css/normalize.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "res/css/ion.rangeSlider.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "res/css/ion.rangeSlider.skinFlat.css" %}">
+        <script>
+            document.title = "Ноутбуки";
+            var redirect = '/notebooks/';
+            history.pushState('', '', redirect);
+        </script>
+<div id="body">
+	<div class="cont1 gray">
+		<div style="height:40px; width:100%"></div>
+		<div id="panel-filter">
+			<div id="panel-price">
+				<p>Цена</p>
+				<br>
+				<hr>
+				<div>
+				    <input type="text" id="price_slider" name="example_name" value="" data-min="{{ price_min }}" data-max="{{ price_max }}" data-from="{{ price_min }}" data-to="{{ price_max }}" data-type="double" data-prefix="грн " data-grid="true" data-grid-num="4"/>
+                </div>
+            </div>
+			<div class="panel-screen">
+				<p>Диагональ</p>
+				<br>
+				<hr>
+				<br>
+				<div>
+					<input type="checkbox" name="d1">
+					<span>9" - 12.5"</span>
+					<br>
+					<input type="checkbox" name="d2">
+					<span>13"</span>
+					<br>
+					<input type="checkbox" name="d3">
+					<span>14"-15.6"</span>
+					<br>
+					<input type="checkbox" name="d4">
+					<span>16" - 17"</span>
+				</div>
+			</div>
+			<div class="panel-screen">
+				<p>Разрешение</p>
+				<br>
+				<hr>
+				<br>
+				<div>
+					<input type="checkbox" name="r1">
+					<span>1900x1080</span>
+					<br>
+					<input type="checkbox" name="r2">
+					<span>1366x768</span>
+					<br>
+					<input type="checkbox" name="r3">
+					<span>1600x900</span>
+				</div>
+			</div>
+			<div class="panel-screen">
+				<p>Количество ядер</p>
+				<br>
+				<hr>
+				<br>
+				<div>
+					<input type="checkbox" name="n1">
+					<span>Одно</span>
+					<br>
+					<input type="checkbox" name="n2">
+					<span>Два</span>
+					<br>
+					<input type="checkbox" name="n3">
+					<span>Четыре</span>
+					<br>
+					<input type="checkbox" name="n4">
+					<span>Восемь</span>
+					<br>
+					<input type="checkbox" name="n5">
+					<span>Другое</span>
+				</div>
+			</div>
+			<div class="panel-screen">
+				<p>Оперативная память</p>
+				<br>
+				<hr>
+				<br>
+				<div>
+					<input type="checkbox" name="m1">
+					<span>Меньше 4 ГБ</span>
+					<br>
+					<input type="checkbox" name="m2">
+					<span>4 - 6 ГБ</span>
+					<br>
+					<input type="checkbox" name="m3">
+					<span>8 - 10 ГБ</span>
+					<br>
+					<input type="checkbox" name="m4">
+					<span>12 ГБ и больше</span>
+				</div>
+			</div>
+			<div class="panel-screen">
+				<p>Видеокарта</p>
+				<br>
+				<hr>
+				<br>
+				<div>
+					<input type="checkbox" name="c1">
+					<span>от AMD</span>
+					<br>
+					<input type="checkbox" name="с2">
+					<span>от nVidia</span>
+				</div>
+			</div>
+            <div class="panel-screen">
+				<p>Процессор</p>
+				<br>
+				<hr>
+				<br>
+				<div>
+					<input type="checkbox" name="w1">
+					<span>AMD</span>
+					<br>
+					<input type="checkbox" name="w2">
+					<span>Intel</span>
+				</div>
+			</div>
+			<div class="panel-screen">
+				<p>Наличие</p>
+				<br>
+				<hr>
+				<br>
+				<div>
+					<input type="checkbox" name="f1">
+					<span id="in-stock">В Наличии</span>
+					<br>
+					<input type="checkbox" name="f2">
+					<span id="custom">Под заказ</span>
+				</div>
+			</div>
+		</div>
+        <div id="loading-img">
+            <img src="{% static "res/img/loading.gif" %}" alt="">
+        </div>
+		<div class="wrp">
+            {% for item in items %}
+                <div class="carousel-block bord">
+                    <a href="{{ item.get_item }}"><img src="{{ item.get_thumb }}"/></a>
+                    <div class="item-name">
+                        <a href="{{ item.get_item }}">{{ item.name }}</a>
+                    </div>
+                    <div class="price">
+                        <a href="{{ item.get_item }}">{{ item.price }} <span>грн.</span></a>
+                    </div>
+                    <div class="btn" data-item="{{ item.inv }}" data-price="{{ item.price }}" data-price_opt="{{ item.price_opt }}">
+                        <a href="#">Купить</a>
+                    </div>
+                </div>
+            {% endfor %}
+		</div>
+	</div>
+</div>
+<div style="height:40px; width:100%;background-color: #ededed;"></div>
+
+<script src="{% static "res/js/ion.rangeSlider.min.js" %}"></script>
+    <script src="{% static "res/js/filter_notes.js" %}"></script>
+{% endblock %}

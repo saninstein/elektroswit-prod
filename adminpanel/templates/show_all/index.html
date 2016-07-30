@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'res/css/table-style.css' %}">
+    <script src="{% static 'res/js/delete_item.js' %}"></script>
+    <div id="body">
+        <div class="a-cont">
+            <div id="a-cont-first" class="a-cont-tittle">{{ category }}</div>
+                <table class="table_blur">
+                    <tr>
+                        <th>#</th>
+                        <th>Название{% if share %} первого{% endif %}</th>
+                        <th>{% if share %}Название второго{% else %}Уникальный id{% endif %}</th>
+                        {% if not share %}
+                            <th>Цена</th>
+                            <th>Цена оптом</th>
+                        {% else %}
+                            <th>Скидка на второй %</th>
+                        {% endif %}
+                        <th>Удалить{% if not share %}/редактировать{% endif %}</th>
+
+                    </tr>
+                    <form method="POST">
+                        {% csrf_token %}
+                    </form>
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            {% if share %}
+                                <td>{{ item.gen_item }}</td>
+                                <td>{{ item.sec_item }}</td>
+                                <td>{{ item.discount }}</td>
+                            {% else %}
+                                <td><a href="{{ item.get_item }}">{{ item.name }}</a></td>
+                                <td>{{ item.inv }}</td>
+                                <td>{{ item.price }}</td>
+                                <td>{% if item.price_opt %} {{ item.price_opt }} {% else %} - {% endif %}</td>
+                            {% endif %}
+                            <td><i data-item="{{ item.inv }}" class="fa fa-times" aria-hidden="true"></i>{% if not share %}<a href="{% url 'edit_item' item.inv %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+                <div style="height: 200px"></div>
+
+        </div>
+    </div>
+
+{% endblock %}

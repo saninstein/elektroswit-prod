@@ -1,0 +1,35 @@
+
+<div style="font-family:Arial, Helvetica, sans-serif" >
+    <h3 style="font-family:Arial, Helvetica, sans-serif">ЗАКАЗ:</h3>
+    <table style="font-family:Arial, Helvetica, sans-serif" BORDER CELLPADDING=10 CELLSPACING=0>
+        <tr style="background-color: #ffd506">
+            <th>Название</th>
+            <th>Кол-во</th>
+            <th>Цена за шт</th>
+        </tr><!-- Table Header -->
+        {% for item, count in items %}
+        <tr>
+            <td><a href="http://www.evroswit.com.ua{{ item.get_item }}">{{ item.name }}</a></td>
+            <td>{% if count > 1 and item.price_opt %}{{ item.price_opt }}{% else %}{{ item.price }}{% endif %}</td>
+            <td>{{ count }}</td>
+        </tr>
+        {% endfor %}
+        <tr border="2" style="background-color: #969696">
+            <td><b>Итого</b></td>
+            <td colspan="2" align="center">{{ pay }}</td>
+        </tr>
+    </table>
+    {% if to_admin %}
+        <h3 style="font-family:Arial, Helvetica, sans-serif">СООБЩЕНИЕ:</h3>
+        <p style="font-family:Arial, Helvetica, sans-serif">{{ message }}</p>
+        <h3 style="font-family:Arial, Helvetica, sans-serif">КОНТАКТНЫЕ ДАННЫЕ:</h3>
+        <p style="font-family:Arial, Helvetica, sans-serif">{{ email }} {{ phone }}</p>
+    {% else %}
+        <h3 style="font-family:Arial, Helvetica, sans-serif">РЕКВИЗИТЫ:</h3>
+        {{ payment.text | safe }}
+        <h3>С Уважением,<br><a href="">Администрация ElektroSwit</a></h3>
+        <p>Это автоматическое письмо. На него не надо отвечать.</p>
+    {% endif %}
+
+
+</div>

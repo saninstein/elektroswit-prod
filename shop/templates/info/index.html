@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <script>
+        document.title = {{ title }}
+    </script>
+    <div style="height: 40px"></div>
+    <div id="body">
+        <br><br><hr><br>
+                <h2 class="soc" style="text-align: center">{{ title }}</h2>
+                <br><hr><br><br><br>
+                <p id="about">{{ info.text | safe}}</p><br><br><br>
+    </div>
+{% endblock %}

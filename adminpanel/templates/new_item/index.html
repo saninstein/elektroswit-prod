@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <div id="body">
+        <div class="a-cont">
+
+            <div id="a-cont-first" class="a-cont-tittle">{{ category }}</div>
+                <form enctype="multipart/form-data" action="{{ url }}" method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form">
+                            <div class="field">
+                                <div class="field-l">
+                                    {{ field.label }}
+                                </div>
+                                {{ field }}
+                                <br>
+                                <div class="help_text">{{ field.help_text }}</div>
+
+                                    {{ field.errors }}
+
+                            </div>
+
+                        </div>
+                    {% endfor %}
+
+                    <input class="btns" type="submit" value="Сохранить">
+                </form>
+        </div>
+    </div>
+{% endblock %}

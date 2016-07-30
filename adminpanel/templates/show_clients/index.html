@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'res/css/table-style.css' %}">
+    <script src="{% static 'res/js/delete_item.js' %}"></script>
+    <div id="body">
+        <div class="a-cont">
+            <div id="a-cont-first" class="a-cont-tittle">Заказы</div>
+                <table class="table_blur">
+                    <tr>
+                        <th>e-mail</th>
+                        <th>Заказы</th>
+                        <th>Скидка %</th>
+                        <th>Добавить скидку</th>
+                    </tr>
+                    {% for client in clients %}
+                        <tr>
+                            <td>{{ client.email }}</td>
+                            <td><a href="{% url 'show_client_orders' client.id %}">Посмотреть</a></td>
+                            <td>{{ client.discount }}</td>
+                            <td><a href="{% url 'client_edit' client.id %}">Изменить</a></td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+                <div style="height: 200px"></div>
+
+        </div>
+    </div>
+
+{% endblock %}

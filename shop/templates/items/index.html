@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    {% if category %}
+        <script>
+            document.title = "{{ category }}";
+        </script>
+    {% else %}
+        <script>
+            alert({{ category }});
+            document.title = "Результаты поиска: {{ search_str }}";
+        var redirect = '/';
+            history.pushState('', '', redirect);
+        </script>
+    {% endif %}
+<div id="body">
+	<div class="cont1 gray">
+		<div style="height:30px; width:100%"></div>
+        {% if category %}
+            <div class="sub-cat">
+                <ul>
+                    {% for sub in subcategory %}
+                        <li><a href="{% url 'other_subcategory' category=cat subcategory=sub.id %}">{{ sub.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+		<div class="wrp">
+            {% for item in items %}
+                <div class="carousel-block bord">
+                    <a href="{{ item.get_item }}"><img src="{{ item.get_thumb }}"/></a>
+                    <div class="item-name">
+                        <a href="{{ item.get_item }}">{{ item.name }}</a>
+                    </div>
+                    <div class="price">
+                        <a href="{{ item.get_item }}">{{ item.price }} <span>грн.</span></a>
+                    </div>
+                    <div class="btn" data-item="{{ item.inv }}" data-price="{{ item.price }}" data-price_opt="{{ item.price_opt }}">
+                        <a href="#">Купить</a>
+                    </div>
+                </div>
+            {% endfor %}
+		</div>
+	</div>
+</div>
+
+{% endblock %}

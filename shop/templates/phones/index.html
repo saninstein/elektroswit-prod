@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static "res/css/blocks.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "res/css/normalize.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "res/css/ion.rangeSlider.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "res/css/ion.rangeSlider.skinFlat.css" %}">
+    {% if category == 1 %}
+        <script>
+            document.title = "Смартфоны";
+            var redirect = '/phones/';
+            history.pushState('', '', redirect);
+        </script>
+    {% endif %}
+    {% if category == 2 %}
+        <script>
+            document.title = "Планшеты";
+            var redirect = '/tablets/';
+            history.pushState('', '', redirect);
+        </script>
+    {% endif %}
+<div id="body">
+	<div class="cont1 gray">
+		<div style="height:40px; width:100%"></div>
+		<div id="panel-filter">
+			<div id="panel-price">
+				<p>Цена</p>
+				<br>
+				<hr>
+				<div>
+				    <input type="text" id="price_slider" name="example_name" value="" data-min="{{ price_min }}" data-max="{{ price_max }}" data-from="{{ price_min }}" data-to="{{ price_max }}" data-type="double" data-prefix="грн " data-grid="true" data-grid-num="4"/>
+                </div>
+            </div>
+			<div class="panel-screen">
+				<p>Диагональ</p>
+				<br>
+				<hr>
+				<br>
+				<div>
+					<input type="checkbox" name="d1">
+					<span>До 4"</span>
+					<br>
+					<input type="checkbox" name="d2">
+					<span>4.1" - 4.5"</span>
+					<br>
+					<input type="checkbox" name="d3">
+					<span>4.5" - 5"</span>
+					<br>
+					<input type="checkbox" name="d4">
+					<span>5.1" - 5.5"</span>
+					<br>
+					<input type="checkbox" name="d5">
+					<span>5.55" - 6"</span>
+					<br>
+					<input type="checkbox" name="d6">
+					<span>Более 6"</span>
+				</div>
+			</div>
+			<div class="panel-screen">
+				<p>Разрешение</p>
+				<br>
+				<hr>
+				<br>
+				<div>
+					<input type="checkbox" name="r1">
+					<span>WQHD (2560х1440)</span>
+					<br>
+					<input type="checkbox" name="r2">
+					<span>FullHD (1920x1080)</span>
+					<br>
+					<input type="checkbox" name="r3">
+					<span>800х400</span>
+					<br>
+					<input type="checkbox" name="r4">
+					<span>HD (1280x720)</span>
+					<br>
+					<input type="checkbox" name="r5">
+					<span>1136x640</span>
+					<br>
+					<input type="checkbox" name="r6">
+					<span>qHD (960x540)</span>
+					<br>
+					<input type="checkbox" name="r7">
+					<span>854х480 и ниже</span>
+					<br>
+					<input type="checkbox" name="r8">
+					<span>4K UHD (3840x2160)</span>
+				</div>
+			</div>
+			<div class="panel-screen">
+				<p>Количество ядер</p>
+				<br>
+				<hr>
+				<br>
+				<div>
+					<input type="checkbox" name="n1">
+					<span>Одно</span>
+					<br>
+					<input type="checkbox" name="n2">
+					<span>Два</span>
+					<br>
+					<input type="checkbox" name="n3">
+					<span>Четыре</span>
+					<br>
+					<input type="checkbox" name="n4">
+					<span>Восемь</span>
+					<br>
+					<input type="checkbox" name="n5">
+					<span>Другое</span>
+				</div>
+			</div>
+			<div class="panel-screen">
+				<p>Оперативная память</p>
+				<br>
+				<hr>
+				<br>
+				<div>
+					<input type="checkbox" name="m1">
+					<span>Меньше 1 ГБ</span>
+					<br>
+					<input type="checkbox" name="m2">
+					<span>1 - 2 ГБ</span>
+					<br>
+					<input type="checkbox" name="m3">
+					<span>2 ГБ</span>
+					<br>
+					<input type="checkbox" name="m4">
+					<span>3 ГБ</span>
+					<br>
+					<input type="checkbox" name="m5">
+					<span>4 ГБ</span>
+					<br>
+					<input type="checkbox" name="m6">
+					<span>Более 4 ГБ</span>
+				</div>
+			</div>
+			<div class="panel-screen">
+				<p>Основная камера</p>
+				<br>
+				<hr>
+				<br>
+				<div>
+					<input type="checkbox" name="c1">
+					<span>2 и меньше</span>
+					<br>
+					<input type="checkbox" name="с2">
+					<span>2 - 7 Мп</span>
+					<br>
+					<input type="checkbox" name="с3">
+					<span>8 - 12 Мп</span>
+					<br>
+					<input type="checkbox" name="с4">
+					<span>13 и более</span>
+				</div>
+			</div>
+			<div class="panel-screen">
+				<p>Наличие</p>
+				<br>
+				<hr>
+				<br>
+				<div>
+					<input type="checkbox" name="f1">
+					<span id="in-stock">В Наличии</span>
+					<br>
+					<input type="checkbox" name="f2">
+					<span id="custom">Под заказ</span>
+				</div>
+			</div>
+		</div>
+        <div id="loading-img">
+            <img src="{% static "res/img/loading.gif" %}" alt="">
+        </div>
+		<div class="wrp">
+            {% for item in items %}
+                <div class="carousel-block bord">
+                    <a href="{{ item.get_item }}"><img src="{{ item.get_thumb }}"/></a>
+                    <div class="item-name">
+                        <a href="{{ item.get_item }}">{{ item.name }}</a>
+                    </div>
+                    <div class="price">
+                        <a href="{{ item.get_item }}">{{ item.price }} <span>грн.</span></a>
+                    </div>
+                    <div class="btn" data-item="{{ item.inv }}" data-price="{{ item.price }}" data-price_opt="{{ item.price_opt }}">
+                        <a href="#">Купить</a>
+                    </div>
+                </div>
+            {% endfor %}
+		</div>
+	</div>
+</div>
+<div style="height:40px; width:100%;background-color: #ededed;"></div>
+
+<script src="{% static "res/js/ion.rangeSlider.min.js" %}"></script>
+    <script src="{% static "res/js/filter_phone.js" %}"></script>
+{% endblock %}

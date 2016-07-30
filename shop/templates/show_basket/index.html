@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'res/css/table-style.css' %}">
+    <script src="{% static 'res/js/delete_basket_item.js' %}"></script>
+    <div id="body">
+        <div class="a-cont">
+            <div id="a-cont-first" class="a-cont-tittle">{{ category }}</div>
+                <table class="table_blur">
+                    <tr>
+                        <th>Название</th>
+                        <th>Цена за шт, грн</th>
+                        <th>Кол-во</th>
+                        <th>Убрать</th>
+                    </tr>
+                    {% for item, count in items %}
+                        <tr data-item="{{ item.inv }}">
+                            <td><a href="{{ item.get_item }}">{{ item.name }}</a></td>
+                            <td>{% if count > 1 and item.price_opt %}{{ item.price_opt }}{% else %}{{ item.price }}{% endif %}</td>
+                            <td>{{ count }}</td>
+                            <td><i data-item="{{ item.inv }}" class="fa fa-times" aria-hidden="true"></i></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <div class="a-cont">
+                    <form action="{% url 'add_order' %}" method="post">
+                        {% csrf_token %}
+                        {% for field in form.visible_fields %}
+                            <div class="form">
+                                <div class="field">
+                                    <div class="field-l">
+                                        {{ field.label }}
+                                    </div>
+                                    {{ field }}
+                                    <br>
+                                    <div class="help_text">{{ field.help_text }}</div>
+
+                                        {{ field.errors }}
+
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                        <br>
+                        <input class="btns" type="submit" value="Оформить">
+
+                    </form>
+                <br>
+                </div>
+
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <script>
+        document.title = "Купить {{ item.name }} - Фото, характеристики, отзывы - ElektroSwit";
+    </script>
+    <script src="{% static "res/js/like.js" %}"></script>
+    <script src="{% static "res/js/buy.js" %}"></script>
+    <link rel="stylesheet" type="text/css"  href="{% static "res/fotorama/fotorama.css" %}">
+    <script src="{% static "res/fotorama/fotorama.js" %}"></script>
+    <div id="body">
+	    <div class="cont-item">
+		    <h1>{% if request.user.is_superuser %}<a href="{% url 'edit_item' item.inv %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> {% endif %}{{ item.name }} <i class="fa fa-heart" aria-hidden="true"></i></h1>
+			<div id="gallery">
+				<br>
+				<div class="fotorama" data-nav="thumbs" data-minheight="300" data-maxheight="70%">
+                    <img src="{{ item.photo.url }}" alt="Главное фото">
+                    {% if item.photo1 != '' %}
+                        <img src="{{ item.photo1.url }}" alt="фото">
+                    {% endif %}
+                    {% if item.photo2 != '' %}
+                        <img src="{{ item.photo2.url }}" alt="фото">
+                    {% endif %}
+                    {% if item.photo3 != '' %}
+                        <img src="{{ item.photo3.url }}" alt="фото">
+                    {% endif %}
+                    {% if item.photo4 != '' %}
+                        <img src="{{ item.photo4.url }}" alt="фото">
+                    {% endif %}
+                    {% if item.photo5 != '' %}
+                        <img src="{{ item.photo5.url }}" alt="фото">
+                    {% endif %}
+                    {% if item.video != '' %}
+                        <a href="{{ item.video }}"></a>
+                    {% endif %}
+				</div>
+				<br>
+			</div>
+			<div id="buy" data-item="{{ item.inv }}">
+				<h2>{{ item.price }} <span>грн.</span></h2>
+                {% if item.price_opt %}
+                    <h4>Оптом: {{ item.price_opt }} <span>грн.</span></h4>
+                {% endif %}
+                <div id="count-panel">Кол-во: <input type="number" min="1" value="1" id="buy-count" ></div>
+				<div id="buy-btn" data-price="{{ item.price }}" data-price_opt="{{ item.price_opt }}">
+					<a>Купить</a>
+				</div>
+                {% if item.availability == 'is'%}
+				    <h3 id="in-order">Есть в наличии<i class="fa fa-check" aria-hidden="true"></i></h3>
+                {% else %}
+                    <h3 id="custom">Под заказ <i class="fa fa-truck" aria-hidden="true"></i></h3>
+                {% endif %}
+                {% if shares %}
+                    <ul id="shares">
+                        <h4>Акционные предложения:</h4><br>
+                            (скидка на второй товар)
+                        {% for share in shares %}
+                            <li><div class='btn' data-price="{{ share.price }}" data-item="{{ share.inv }}" >КУПИТЬ</div><a href="{{ share.sec_item.get_item }}">{{ share.sec_item.name }} </a><span>-{{ share.discount }}%</span></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+			</div>
+			<div class="descript">
+				<div>
+					<div class="btns-des">Описание</div>
+                    <div class="des">{{ item.description | safe }}</div>
+				</div>
+
+			</div>
+            {% if item.link_items_id == 1 %}
+                <div class="chark">
+                    <a>Характеристики</a>
+                    {% if item.diagonal %}
+                        <div>
+                            <div class="chark-name">Диагональ</div>
+                            <div class="chark-value">{{ item.diagonal }} "</div>
+                        </div>
+                    {% endif %}
+                    {% if item.resolution != '' %}
+                        <div>
+                            <div class="chark-name">Разрешение экрана</div>
+                            <div class="chark-value">{{ item.resolution }}</div>
+                        </div>
+                    {% endif %}
+                    {% if item.link_category_id == 3 %}
+                        {% if item.gpu != '' %}
+                            <div>
+                                <div class="chark-name">Видеокарта</div>
+                                <div class="chark-value">{{ item.gpu }}</div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    {% if item.display_other != '' %}
+                        <div>
+                            <div class="chark-name">Дисплей дополнительно</div>
+                            <div class="chark-value">{{ item.display_other }}</div>
+                        </div>
+                    {% endif %}
+                    {% if item.wireless != '' %}
+                        <div>
+                            <div class="chark-name">Беспроводные возможности</div>
+                            <div class="chark-value">{{ item.wireless }}</div>
+                        </div>
+                    {% endif %}
+                    {% if item.link_category_id == 3 %}
+                        {% if item.optical_privod != '' %}
+                            <div>
+                                <div class="chark-name">Разрешение экрана</div>
+                                <div class="chark-value">{{ item.optical_privod }}</div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    {% if item.interfaces != '' %}
+                        <div>
+                            <div class="chark-name">Интерфейсы и подключения</div>
+                            <div class="chark-value">{{ item.interfaces }}</div>
+                        </div>
+                    {% endif %}
+                    {% if item.link_category_id == 1 or item.link_category_id == 2 %}
+                        {% if item.standards != '' %}
+                            <div>
+                                <div class="chark-name">Стандарты</div>
+                                <div class="chark-value">{{ item.standards }}</div>
+                            </div>
+                        {% endif %}
+                        {% if   item.sim_count %}
+                            <div>
+                                <div class="chark-name">Кол-во sim-карт</div>
+                                <div class="chark-value">{{ item.sim_count }}</div>
+                            </div>
+                        {% endif %}
+                        {% if item.front_camera %}
+                            <div>
+                                <div class="chark-name">Размер фронтальной камеры</div>
+                                <div class="chark-value">{{ item.front_camera }} МП</div>
+                            </div>
+                        {% endif %}
+                        {% if item.front_camera_other != '' %}
+                            <div>
+                                <div class="chark-name">Фронтальнаяя камера дополнительно</div>
+                                <div class="chark-value">{{ item.front_camera_other }}</div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    {% if item.camera %}
+                        <div>
+                            <div class="chark-name">Размер камеры</div>
+                            <div class="chark-value">{{ item.camera }} МП</div>
+                        </div>
+                    {% endif %}
+                    {% if item.camera_other != '' %}
+                        <div>
+                            <div class="chark-name">Камера дополнительно</div>
+                            <div class="chark-value">{{ item.camera_other }}</div>
+                        </div>
+                    {% endif %}
+                    {% if item.osystem != '' %}
+                        <div>
+                            <div class="chark-name">Операционная система</div>
+                            <div class="chark-value">{{ item.osystem }}</div>
+                        </div>
+                    {% endif %}
+                    {% if item.core_other != '' %}
+                        <div>
+                            <div class="chark-name">Процессор</div>
+                            <div class="chark-value">{{ item.core_other }}</div>
+                        </div>
+                    {% endif %}
+                    {% if item.count_core %}
+                        <div>
+                            <div class="chark-name">Кол-во ядер</div>
+                            <div class="chark-value">{{ item.count_core }}</div>
+                        </div>
+                    {% endif %}
+                    {% if item.ram %}
+                        <div>
+                            <div class="chark-name">Оперативная память</div>
+                            <div class="chark-value">{{ item.ram }} МБ</div>
+                        </div>
+                    {% endif %}
+                    {% if item.memory %}
+                        <div>
+                            <div class="chark-name">Внутреняя память</div>
+                            <div class="chark-value">{{ item.memory }} ГБ</div>
+                        </div>
+                    {% endif %}
+                    {% if item.memory_other != '' %}
+                        <div>
+                            <div class="chark-name">Память дополнительно</div>
+                            <div class="chark-value">{{ item.memory_other }}</div>
+                        </div>
+                    {% endif %}
+                    {% if item.battery %}
+                        <div>
+                            <div class="chark-name">Ёмкость батареи</div>
+                            <div class="chark-value">{{ item.battery }} mAh</div>
+                        </div>
+                    {% endif %}
+                    {% if item.other != '' %}
+                        <div>
+                            <div class="chark-name">Дополнительно</div>
+                            <div class="chark-value">{{ item.other }}</div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+	    </div>
+    </div>
+{% endblock %}

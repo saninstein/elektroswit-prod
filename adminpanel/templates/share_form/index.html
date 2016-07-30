@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+    <div id="body">
+        <div class="a-cont">
+                <ul class="choice_item" id="ci1"></ul>
+                <ul class="choice_item" id="ci2"></ul>
+            <div id="a-cont-first" class="a-cont-tittle">Акция</div>
+                <form enctype="multipart/form-data" action="" method="post">
+                    {% csrf_token %}
+                        <div class="form">
+                            <div class="field">
+                                <div class="field-l">
+                                    Первый товар
+                                </div>
+                                <input id='first-item' type="text" class="new-cont-textinput">
+                                <br>
+                                <div class="help_text">Начните вводить название</div>
+                            </div>
+                        </div>
+                        <div class="form">
+                            <div class="field">
+                                <div class="field-l">
+                                    Второй товар
+                                </div>
+                                <input id='second-item' type="text" class="new-cont-textinput">
+                                <br>
+                                <div class="help_text">Начните вводить название</div>
+                            </div>
+                        </div>
+                        <div class="form">
+                            <div class="field">
+                                <div class="field-l">
+                                    Скидка
+                                </div>
+                                <input id="discount" type="number" class="new-cont-textinput">
+                                <br>
+                                <div class="help_text">Скидка в процентах</div>
+                            </div>
+                        </div>
+                    {% if error %}
+                                <div class="errorlist">
+                                    <ul>
+                                        <li>{{ error }}</li>
+                                    </ul>
+                                </div>
+                    {% endif %}
+                    <input class="btns" type="submit" value="Добавить">
+                </form>
+        </div>
+    </div>
+    <script src="{% static 'res/js/share.js' %}"></script>
+{% endblock %}

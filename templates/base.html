@@ -1,0 +1,180 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width">
+	<meta charset="utf-8">
+    <link rel="shortcut icon" href="{% static  "res/img/favicon.ico" %}" type="image/x-icon">
+	<link rel="stylesheet" href="{% static "res/css/font-awesome.min.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "res/css/style.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "res/css/styles-carousel.css" %}">
+	<script src="{% static "res/js/jquery-3.0.0.min.js" %}"></script>
+    <script src="{% static "res/js/jquery.cookie.js" %}"></script>
+  	<script src="{% static "res/js/jquery.slides.min.js" %}"></script>
+    <script src="{% static "res/js/basket.js" %}"></script>
+    <script src="{% static "res/js/menu.js" %}"></script>
+	<title>ElektroSwit - Интернет-магазин современных гаджетов</title>
+</head>
+<body>
+<div id="search-list"></div>
+<div id="message">
+    <div id="message-text">
+        Сообщение
+    </div>
+</div>
+<div id="header">
+	<div id="header-menu">
+		<ul>
+			<li><a href="{% url 'info' 'payment' %}">Оплата</a></li>
+			<li><a href="{% url 'info' 'delivery' %}">Доставка</a></li>
+            {% if request.user.is_superuser %}
+                <li><a href="/adminpanel/"><u>Админка</u></a></li>
+            {% endif %}
+
+            {% if request.user.is_authenticated %}
+                <li><a href={% url 'logout' %}><u>Выйти</u></a></li>
+            {% endif %}
+
+
+
+		</ul>
+	</div>
+	<div id="head-up">
+		<div id="emb">
+			<a href="{% url 'general' %}"><img src="{% static "res/img/logo1.png" %}" width="200px"></a>
+		</div>
+		<div id="search-panel">
+			<span><a>Хочеш техніку купить - заходи в Elektroswit!</a></span>
+			<input id="search" type="text" placeholder="HP Compaq 43..." name="">
+		</div>
+		<div id="basket" data-basket="{% if 'basket' in request.session %}FULL{% else %}EMPTY{% endif %}">
+			<img id="basket-full" src="{% static "res/img/shopping-cart-full.png" %}" width="50px">
+            <img id="basket-empty" src="{% static "res/img/shopping-cart.png" %}" width="50px">
+			<a href="{% url 'show_basket' %}">Заказ <strong><u></u></strong></a>
+		</div>
+	</div>
+	<div id="menu">
+		<ul>
+			<li data-pd="#pd1">
+				<a href="{% url 'phones' %}">Смартфоны</a>
+			</li>
+            <li data-pd="#pd2">
+				<a href="{% url 'tablets' %}">Планшеты</a>
+			</li>
+			<li data-pd="#pd3">
+				<a href="{% url 'notes' %}">Ноутбуки</a>
+			</li>
+            <li data-pd="#pd4">
+				<a href="{% url 'other_category' 'appliances' %}">Бытовая Техника</a>
+			</li>
+            <li data-pd="#pd5">
+				<a href="{% url 'other_category' 'master-tools' %}">Всё для Мастера</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div id="pod-menu">
+    <ul>
+        <li id="pd1">
+            <a href="{% url 'other_subcategory' 'accessories' '4' %}">Всё для Смартфонов</a>
+        </li>
+        <li id="pd2">
+            <a href="{% url 'other_subcategory' 'accessories' '5' %}">Всё для Планшетов</a>
+        </li>
+        <li id="pd3">
+            <a href="{% url 'other_subcategory' 'accessories' '6' %}">Всё для Ноутбуков</a>
+        </li>
+        <li id="pd4">
+            <div class="in-list">
+                <ul>
+                    <li>
+                        <a href="{% url 'other_subcategory' 'appliances' '10' %}">Утюги</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'other_subcategory' 'appliances' '11' %}">Пылесосы</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'other_subcategory' 'appliances' '12' %}">Электрочайники</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'other_subcategory' 'appliances' '13' %}">Прочее</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li id="pd5">
+            <div class="in-list">
+                <ul>
+                    <li>
+                        <a href="{% url 'other_subcategory' 'master-tools' '7' %}">Паяльные станции</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'other_subcategory' 'master-tools' '8' %}">Электроинструменты</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'other_subcategory' 'master-tools' '9' %}">Прочее</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+{% block content %}{% endblock %}
+
+<div id="footer">
+	<div class="row1">
+		<img id="logo" src="{% static "res/img/logo.png" %}" width="100px">
+		<div>
+			Интернет-магазин<br>
+			электроники<br>
+			© 2016
+		</div>
+	</div>
+	<div class="row2">
+		<div>
+			<h3>Каталог</h3>
+			<br>
+			<a href="{% url 'tablets' %}">Планшеты</a><br>
+			<a href="{% url 'notes' %}">Ноутбуки</a><br>
+			<a href="{% url 'phones' %}">Смартфоны</a><br>
+			<a href="{% url 'other_category' 'appliances' %}">Бытовая техника</a><br>
+			<a href="{% url 'other_category' 'master-tools' %}">Всё для мастера</a>
+		</div>
+	</div>
+	<div class="row2">
+		<div>
+			<h3>Клиентам</h3>
+			<br>
+			<a href="{% url 'info' 'payment' %}">Оплата</a><br>
+			<a href="{% url 'info' 'delivery' %}">Доставка</a>
+
+		</div>
+	</div>
+	<div class="row1">
+		<div>
+			<h3>Контактная информация</h3>
+			
+			<div>
+				<p><i class="fa yellow fa-phone-square" aria-hidden="true"></i>&nbsp;&nbsp;(099) 755-42-80</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(093) 017-09-16</p>
+			</div>
+			<div>
+				<p><i class="fa fa-envelope yellow" aria-hidden="true"></i>&nbsp;&nbsp;<a href="">mail@mail.com</a></p>
+			</div>
+		</div>
+		
+	</div>
+	<div id="site-maker">
+		 		<p>Сайт разработан</p>
+		 		<a href="https://new.vk.com/deerk_studio"><img src="{% static "res/img/mainlogo.png" %}" width="120px" alt=""></a>
+		 	</div>	 	
+</div>
+
+<script src="{% static "res/js/slides.js" %}"></script>
+<script src="{% static "res/js/carousel.js" %}"></script>
+<script src="{% static "res/js/search.js" %}"></script>
+<script src="{% static "res/js/message.js" %}"></script>
+<script src="{% static "res/js/buy_once.js" %}"></script>
+
+</body>
+</html>

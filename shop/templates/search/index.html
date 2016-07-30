@@ -1,0 +1,36 @@
+{% if phones.count %}
+    <div class="search-labe">Смартфоны</div>
+    {% for phone in phones %}
+        <div><a href="{{ phone.get_item }}">{{ phone.name }}</a></div>
+    {% endfor %}
+{% endif %}
+{% if tablets.count %}
+    <div class="search-labe">Планшеты</div>
+    {% for phone in tablets %}
+        <div><a href="{{ phone.get_item }}">{{ phone.name }}</a></div>
+    {% endfor %}
+{% endif %}
+{% if note.count %}
+    <div class="search-labe">Ноутбуки</div>
+    {% for phone in note %}
+        <div><a href="{{ phone.get_item }}">{{ phone.name }}</a></div>
+    {% endfor %}
+{% endif %}
+{% if acs.count %}
+    <div class="search-labe">Акссесуары/Комплектующие</div>
+    {% for phone in acs %}
+        <div><a href="{{ phone.get_item }}">{{ phone.name }}</a></div>
+    {% endfor %}
+{% endif %}
+{% if master.count %}
+    <div class="search-labe">Всё для Мастера</div>
+    {% for phone in master %}
+        <div><a href="{{ phone.get_item }}">{{ phone.name }}</a></div>
+    {% endfor %}
+{% endif %}
+{% if home.count %}
+    <div class="search-labe">Бытовая Техника</div>
+    {% for phone in home %}
+        <div><a href="{{ phone.get_item }}">{{ phone.name }}</a></div>
+    {% endfor %}
+{% endif %}

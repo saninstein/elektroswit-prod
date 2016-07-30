@@ -1,0 +1,20 @@
+{% if items.count %}
+    {% for item in items %}
+        <div class="carousel-block bord">
+            <a href="{{ item.get_item }}"><img src="{{ item.get_thumb }}"/></a>
+            <div class="item-name">
+                <a href="{{ item.get_item }}">{{ item.name }}</a>
+            </div>
+            <div class="price">
+                <a href="{{ item.get_item }}">{{ item.price }} <span>грн.</span></a>
+            </div>
+            <div class="btn"  data-item="{{ item.inv }}" data-price="{{ item.price }}" data-price_opt="{{ item.price_opt }}">
+                <a href="#">Купить</a>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <div style="background-color:white;width:100%;height: 50px;text-align: center;font-family:RobotoCondensedR;margin-top: -10px">
+        <h1>Ничего не найдено</h1>
+    </div>
+{% endif %}

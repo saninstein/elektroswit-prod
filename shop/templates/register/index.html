@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="body">
+    <div id="login">
+        <form class="" action="{% url 'register' %}" method="post">{% csrf_token %}
+            <h2>Регистрация</h2><br>
+            <label>E-mail</label><br>
+            {{ form.email }}<br>
+            {{ form.email.errors }}<br>
+            {{form.errors.values.0}}
+            <label>Ник</label><br>
+            {{ form.username }}<br>
+            {{form.errors.values.1}}<br>
+            <label>Пароль</label><br>
+            {{ form.password1 }}<br>
+            <label>Пароль ещё раз</label><br>
+            {{ form.password2 }}<br>
+            <input class="button" style="width: auto" name="submit" type="submit" value="Зарегистрироваться" />
+        </form>
+    </div>
+</div>
+{% endblock %}

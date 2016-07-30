@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+    <script src="{% static 'res/js/carousel_loggles.js' %}"></script>
+    <script src="{% static 'res/js/slide_link.js' %}"></script>
+    <div id="body">
+	<div class="container">
+		<div id="slides">
+            {% for slide in slides %}
+                <img data-link="{{ slide.link }}" src="{{ slide.img.url }}" alt="Интернет-магазин ElektroSwit">
+            {% endfor %}
+		 </div>
+	 </div>
+	 <div class="container gray">
+	 <div class="hd">
+		 <div class="btns btn-new">
+		    <a>Новинки</a>
+		 </div>
+		 <div class="btns btn-popular notselected-btn">
+		 	<a>Популярные</a>
+		 </div>
+	 </div>
+	 <br>
+        {% if new_items %}
+            <div id="news" class="carousel gray">
+              <div class="carousel-button-left"><a href="#"></a></div>
+              <div class="carousel-button-right"><a href="#"></a></div>
+                <div class="carousel-wrapper">
+                   <div class="carousel-items">
+                       {% for new_item in new_items%}
+                          <div class="carousel-block">
+                              <a href="{{ new_item.get_item }}"><img src="{{ new_item.get_thumb }}"></a>
+
+
+                                <div class="item-name">
+                                    <a href="{{ new_item.get_item }}">{{ new_item.name }}</a>
+                                </div>
+                                <div class="price">
+                                    <a href="{{ new_item.get_item }}">{{ new_item.price }} <span>грн.</span></a>
+                                </div>
+                                <div class="btn"  data-item="{{ new_item.inv }}" data-price="{{ new_item.price }}" data-price_opt="{{ new_item.price_opt }}">
+                                    <a href="#">Купить</a>
+                                </div>
+                          </div>
+                       {% endfor %}
+
+                   </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if pop_items %}
+            <div id="pop" class="carousel gray">
+              <div class="carousel-button-left"><a href="#"></a></div>
+              <div class="carousel-button-right"><a href="#"></a></div>
+                <div class="carousel-wrapper">
+                   <div class="carousel-items">
+                       {% for new_item in pop_items %}
+                          <div class="carousel-block">
+                              <a href="{{ new_item.get_item }}"><img src="{{ new_item.get_thumb }}"></a>
+
+
+                                <div class="item-name">
+                                    <a href="{{ new_item.get_item }}">{{ new_item.name }}</a>
+                                </div>
+                                <div class="price">
+                                    <a href="{{ new_item.get_item }}">{{ new_item.price }} <span>грн.</span></a>
+                                </div>
+                                <div class="btn" data-item="{{ new_item.inv }}" data-price="{{ new_item.price }}" data-price_opt="{{ new_item.price_opt }}">
+                                    <a href="#">Купить</a>
+                                </div>
+                          </div>
+                       {% endfor %}
+
+                   </div>
+                </div>
+            </div>
+        {% endif %}
+	 </div>
+	 <div class="wrapper">
+	 <br>
+	 	<h2 class="soc">Рекомендуем подписаться на нас в соцсетях</h2>
+	 	<br><hr><br>
+	 	<a href="https://new.vk.com/public124706339">
+	 		<img src="{% static "res/img/VK.png" %}" alt="Вконтакте">
+	 	</a>
+	 	<br><br><hr><br>
+	 	<h2 class="soc">О магазине</h2>
+	 	<br><hr><br><br><br>
+	 	<p id="about">{{ about.text | safe }}</p><br><br><br>
+	 </div>
+
+</div>
+
+{% endblock %}
